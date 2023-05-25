@@ -4,7 +4,7 @@ import RootLayout from "./layouts/RootLayout";
 import Login from "./pages/login/Login";
 import Home from "./pages/home/Home";
 
-const isAuth = true
+const isAuth = localStorage.getItem("token");
 
 const App = () => {
 
