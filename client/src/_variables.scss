@@ -1,0 +1,39 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+
+$main_bg-color: #EFF2F8;
+$main_dark-text-color: #00071A;
+$primary: #6A75CA;
+$primary-hover: #616cbb;
+$danger: #F63C3C;
+$success: #4caf50;
+
+$area-width: 42%;
+
+@mixin flex-center() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+@mixin flex-align-center() {
+    display: flex;
+    align-items: center;
+}
+
+@mixin font-16-400() {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    color: $main_dark-text-color;
+}
+
+@mixin font-15-400($color) {
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 22px;
+    color: $color;
+}
