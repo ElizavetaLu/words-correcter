@@ -35,11 +35,12 @@ const wordsSchema = new mongoose_1.Schema({
     sourceWord: String,
     targetLang: String,
     targetWord: String,
-    speechPart: String,
+    speechPart: [String],
     transcriptions: [String],
     synonyms: [String],
     antonyms: [String],
     definitions: [String],
+    examples: [String],
     usersList: [String],
     correct: Boolean
 });

@@ -13,12 +13,12 @@ const correctedWordsSchema: Schema = new Schema({
     sourceWord: String,
     targetLang: String,
     targetWord: String,
-    speechPart: String,
+    speechPart: [String],
     transcriptions: [String],
     synonyms: [String],
     antonyms: [String],
-    definitions: [String],
-    usersList: [String],
+    definitions: [String], 
+    examples: [String], 
     correct: Boolean,
     userId: String
 });

@@ -7,11 +7,12 @@ export interface IWords extends Document {
     sourceWord: string,
     targetLang: string,
     targetWord: string,
-    speechPart: string,
+    speechPart: string[],
     transcriptions: string[],
     synonyms: string[],
     antonyms: string[],
     definitions: string[],
+    examples: string[],
     usersList: string[],
     correct: boolean
 };
@@ -21,11 +22,12 @@ const wordsSchema: Schema = new Schema({
     sourceWord: String,
     targetLang: String,
     targetWord: String,
-    speechPart: String,
+    speechPart: [String],
     transcriptions: [String],
     synonyms: [String],
     antonyms: [String],
     definitions: [String],
+    examples: [String],
     usersList: [String],
     correct: Boolean
 });

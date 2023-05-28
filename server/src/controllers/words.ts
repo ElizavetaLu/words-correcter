@@ -41,6 +41,7 @@ export const setCorrectedWord: RequestHandler = (req, res, next) => {
         synonyms,
         antonyms,
         definitions,
+        examples,
         id
     } = req.body;
 
@@ -60,6 +61,7 @@ export const setCorrectedWord: RequestHandler = (req, res, next) => {
         synonyms,
         antonyms,
         definitions,
+        examples,
         correct: true,
         userId
     });
@@ -81,12 +83,13 @@ export const setBrandNewWord: RequestHandler = (req, res, next) => {
         transcriptions,
         synonyms,
         antonyms,
-        definitions
+        definitions,
+        examples
     } = req.body;
 
     const userId = req.user;
 
-    const sentences = new Words({
+    const word = new Words({
         sourceLang,
         sourceWord,
         targetLang,
@@ -96,11 +99,12 @@ export const setBrandNewWord: RequestHandler = (req, res, next) => {
         synonyms,
         antonyms,
         definitions,
+        examples,
         usersList: [userId],
         correct: false
     });
 
-    sentences.save()
+    word.save()
         .then(() => res.status(200).send({ result: 'New word was added' }))
         .catch(() => res.status(400).send({ error: 'Bad request' }))
 }
