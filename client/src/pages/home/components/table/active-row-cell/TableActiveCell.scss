@@ -1,0 +1,40 @@
+@import "../../../../../variables";
+
+.cell {
+    width: $area-width;
+
+    &__word-row {
+        display: flex;
+        gap: 10px;
+    }
+
+    &__input {
+        padding: 8px 12px;
+        border-radius: 6px;
+        box-shadow: 2px 2px 8px rgba(0, 7, 26, 0.04);
+        @include font-15-400($main_dark-text-color);
+        background: rgba(255, 255, 255, 0.8);
+        width: 100%;
+        height: 44px;
+        border: 2px solid #E1E3F7;
+        outline: none;
+    }
+
+    &__blocks {
+        border-top: 1px solid #fff;
+        max-height: 550px;
+        overflow: hidden;
+        overflow-y: scroll;
+
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+        padding-top: 10px;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+    }
+}

@@ -1,10 +1,14 @@
-import { SyntheticEvent, useEffect, useState } from "react";
+import { Dispatch, SyntheticEvent, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import { getWords, setSearchTerm } from "../../../../store/actions/actionCreators";
 import "./SearchWords.scss";
 
 
 const SearchWords = () => {
 
-    const [searchTerm, setSearchTerm] = useState<string>('')
+    const { searchTerm, sourceLang, targetLang } = useSelector((state: any) => state.words);
+    const dispatch: Dispatch<any> = useDispatch();
 
 
     const onSearchSubmit = (e: SyntheticEvent) => {
@@ -12,12 +16,24 @@ const SearchWords = () => {
 
         if (!searchTerm.trim()) return;
 
+        dispatch(getWords(true, {
+            pageNumber: 1,
+            sourceLang: sourceLang.code,
+            targetLang: targetLang.code,
+            searchTerm,
+        }));
     }
-
+    
 
     useEffect(() => {
         const timeoutId = setTimeout(() => {
-            //search request
+
+            dispatch(getWords(true, {
+                searchTerm,
+                pageNumber: 1,
+                sourceLang: sourceLang.code,
+                targetLang: targetLang.code,
+            }))
         }, 300)
 
         return () => clearTimeout(timeoutId)
@@ -31,7 +47,7 @@ const SearchWords = () => {
                 className="search__input"
                 placeholder="Search"
                 value={searchTerm}
-                onChange={e => setSearchTerm(e.target.value)}
+                onChange={e => dispatch(setSearchTerm(e.target.value))}
             />
             < button type="submit" className="search__button" >
                 <img src="/images/icons/search.png" alt="search" className="search__icon" />

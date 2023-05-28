@@ -1,15 +1,12 @@
 @import "../../../variables";
 
 .tiny-dropdown {
-    position: relative;
-    right: 0;
-    top: 0;
-    z-index: 1;
+    position: relative; 
     background: #FFFFFF;
     box-shadow: 2px 2px 8px rgba(0, 7, 26, 0.06);
-    border-radius: 17px;
-    padding: 20px 8px;
-    width: 58px;
+    border-radius: 6px;
+    padding: 10px 8px;
+    width: 85px;
     @include flex-align-center;
     justify-content: space-between;
 
@@ -27,7 +24,8 @@
         font-family: 'Poppins';
         border: none;
         outline: none;
-        width: 22px;
+        width: 40px;
+        text-align: center;
         position: relative;
         z-index: 1;
     }
@@ -44,13 +42,14 @@
     }
 
     &__list {
+        position: absolute;
+        z-index: 1;
         box-shadow: inset 0px 1px 2px rgba(0, 7, 26, 0.06);
         background-color: #fff;
-        border-bottom-left-radius: 17px;
-        border-bottom-right-radius: 17px;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
         width: 100%;
-        position: absolute;
-        top: 43px;
+        top: 37px;
         left: 0;
         right: 0;
         max-height: 250px;

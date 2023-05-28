@@ -1,25 +1,64 @@
-import { useState } from "react";
+import { Dispatch, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getWords, setSourceLang, setTargetLang } from "../../../../store/actions/actionCreators";
+import { ILanguage } from "../../../../interfaces";
 
 import DropDownInput from "../../../../components/inputs/dropdown-input/DropDownInput";
 import RowSpace from "../../../../components/row-space/RowSpace";
-import { ILanguage } from "../../../../interfaces";
 import "./SelectLanguage.scss";
 
 
 
 const SelectLanguage = () => {
 
-    const [currentSourceLang, setCurrentSourceLang] = useState<ILanguage>({ "name": 'Afrikaans', "code": 'af', "flag": 'za' });
-    const [currentTargetLang, setCurrentTargetLang] = useState<ILanguage>({ "name": 'Amharic', "code": 'am', "flag": 'et' });
+    const { sourceLang, targetLang } = useSelector((state: any) => state.words);
 
 
+    const [currentSourceLang, setCurrentSourceLang] = useState<ILanguage>(sourceLang);
+    const [currentTargetLang, setCurrentTargetLang] = useState<ILanguage>(targetLang);
 
-    const onReverse = () => { }
+
+    const dispatch: Dispatch<any> = useDispatch();
+
+    const onReverse = () => {
+        dispatch(setSourceLang(targetLang));
+        dispatch(setTargetLang(sourceLang));
+
+        dispatch(getWords(true,
+            {
+                pageNumber: 1,
+                sourceLang: currentTargetLang.code,
+                targetLang: currentSourceLang.code
+            }
+        ));
+
+        setCurrentSourceLang(currentTargetLang);
+        setCurrentTargetLang(currentSourceLang);
+    }
 
 
-    const onSourceLangSelect = (lang: ILanguage) => { }
+    const onSourceLangSelect = (lang: ILanguage) => {
 
-    const onTargetLangSelect = (lang: ILanguage) => { }
+        dispatch(setSourceLang(lang));
+
+        dispatch(getWords(true, {
+            pageNumber: 1,
+            sourceLang: lang.code,
+            targetLang: currentTargetLang.code
+        }))
+    }
+
+    const onTargetLangSelect = (lang: ILanguage) => {
+
+        dispatch(setTargetLang(lang));
+
+        dispatch(getWords(true, {
+            pageNumber: 1,
+            sourceLang: currentSourceLang.code,
+            targetLang: lang.code
+        }))
+    }
+
 
 
     return (

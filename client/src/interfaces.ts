@@ -1,5 +1,4 @@
 //components
-
 export interface IPopup {
     isShown: boolean,
     message: string,
@@ -7,8 +6,8 @@ export interface IPopup {
 }
 
 
-//components props
 
+//components props
 export interface ILanguageDDInputProps {
     value: ILanguage,
     setValue: (lang: ILanguage) => void;
@@ -44,13 +43,38 @@ export interface ITableRowDefault {
 }
 
 export interface IWordsData {
-    id: string,
+    _id: string,
     sourceLang: string,
     sourceWord: string,
     targetLang: string,
     targetWord: string
 }
 
+export interface IActiveTableCell {
+    word: string,
+    lang: string,
+    setWord: (val: string) => void,
+    setLang: (val: string) => void,
+
+    newSpeechPart?: string[],
+    setNewSpeechPart?: (val: string[]) => void,
+    newTranscriptions?: string[],
+    setNewTranscriptions?: (val: string[]) => void,
+    newSynonyms?: string[],
+    setNewSynonyms?: (val: string[]) => void,
+    newAntonyms?: string[],
+    setNewAntonyms?: (val: string[]) => void,
+    newDefinitions?: string[],
+    setNewDefinitions?: (val: string[]) => void,
+    newExamples?: string[],
+    setNewExamples?: (val: string[]) => void
+}
+ 
+export interface IBlock {
+    title: string,
+    dataList: string[] | undefined,
+    setDataList: (val: string[]) => void 
+} 
 
 
 // language
@@ -68,10 +92,81 @@ export interface AuthActionForReducer {
     payload: string
 }
 
+export interface AuthActionForAC {
+    type: string,
+    payload: AuthCredentials | string
+}
+
+
+
+
 
 //states 
 export interface AuthState {
     token: string | null,
     email: string | null,
     errorMessage: string,
+}
+
+export interface IWordsState {
+    isLoading: boolean,
+    totalPages: number,
+    pageNumber: number,
+    searchTerm: string,
+    sourceLang: ILanguage,
+    targetLang: ILanguage,
+    words: IWordsData[],
+    activeItemId: null | string,
+    activeWord: {
+        sourceWord: string,
+        sourceLang: string,
+        targetWord: string,
+        targetLang: string,
+        speechPart: string[],
+        transcriptions: string[],
+        synonyms: string[],
+        antonyms: string[],
+        definitions: string[],
+        examples: string[],
+    }
+}
+
+
+
+
+
+//request
+export interface IRequestData {
+    pageNumber: number,
+    sourceLang: string,
+    targetLang: string
+    searchTerm?: string,
+}
+
+export interface AuthCredentials {
+    email: string,
+    password: string
+}
+
+
+
+// dispatch
+export type AuthDispatchType = (args: AuthActionForAC) => AuthActionForAC
+
+
+
+
+//recieved data 
+export interface IWordsData {
+    id: string,
+    sourceLang: string,
+    sourceWord: string,
+    targetLang: string,
+    targetWord: string,
+    speechPart: string[],
+    transcriptions: string[],
+    synonyms: string[],
+    antonyms: string[],
+    definitions: string[],
+    examples: string[]
 }
