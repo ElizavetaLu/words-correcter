@@ -24,7 +24,7 @@ const getWords = async (req, res, next) => {
 };
 exports.getWords = getWords;
 const setCorrectedWord = (req, res, next) => {
-    const { sourceLang, sourceWord, targetLang, targetWord, speechPart, transcriptions, synonyms, antonyms, definitions, id } = req.body;
+    const { sourceLang, sourceWord, targetLang, targetWord, speechPart, transcriptions, synonyms, antonyms, definitions, examples, id } = req.body;
     const userId = req.user;
     words_1.Words.updateOne({ _id: id }, { $addToSet: { usersList: userId } })
         .then(() => { })
@@ -39,6 +39,7 @@ const setCorrectedWord = (req, res, next) => {
         synonyms,
         antonyms,
         definitions,
+        examples,
         correct: true,
         userId
     });
@@ -48,9 +49,9 @@ const setCorrectedWord = (req, res, next) => {
 };
 exports.setCorrectedWord = setCorrectedWord;
 const setBrandNewWord = (req, res, next) => {
-    const { sourceLang, sourceWord, targetLang, targetWord, speechPart, transcriptions, synonyms, antonyms, definitions } = req.body;
+    const { sourceLang, sourceWord, targetLang, targetWord, speechPart, transcriptions, synonyms, antonyms, definitions, examples } = req.body;
     const userId = req.user;
-    const sentences = new words_1.Words({
+    const word = new words_1.Words({
         sourceLang,
         sourceWord,
         targetLang,
@@ -60,11 +61,28 @@ const setBrandNewWord = (req, res, next) => {
         synonyms,
         antonyms,
         definitions,
+        examples,
         usersList: [userId],
         correct: false
     });
-    sentences.save()
+    word.save()
         .then(() => res.status(200).send({ result: 'New word was added' }))
         .catch(() => res.status(400).send({ error: 'Bad request' }));
 };
 exports.setBrandNewWord = setBrandNewWord;
+// const word = new Words({
+//     sourceLang: 'en',
+//     sourceWord: 'kr,;ltbms',
+//     targetLang: 'be',
+//     targetWord: ';eknlk',
+//     speechPart: ['adf','advc'],
+//     transcriptions: ['/dsfv/', '/tyhndt/'],
+//     synonyms: ['sdfgb','rbtrtb','rtbsr','srbs','sbdsfb'],
+//     antonyms: ['sedfv','tuikui','qwefqdwe','uikui'],
+//     definitions: ['gvhrefjkkwdll gbkreflwd jhbeknflw', 'kebn; eqklwlkq cv jae hje cea'],
+//     examples: ['kdjbf dfsvdfv df as dade', 'qerfq erfqer fre f', 'hbjakn akdnv;al awkjefkje'],
+//     usersList: [],
+//     correct: false
+// });
+// word.save().then(res=>console.log(res))
+// CorrectedWords.deleteMany({sourceLang:"en"}).then(res=>console.log(res))
