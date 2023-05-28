@@ -1,41 +1,24 @@
-import { useEffect, useState } from "react";
+import { Dispatch, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getWords } from "../../../../store/actions/actionCreators";
 
-import TableRowDefault from "./TableRowDefault";
+import Loading from "../../../../components/loading/Loading";
+import TableRowDefault from "./default-row/TableRowDefault";
+import TableRowActive from "./active-row/TableRowActive";
 import "./Table.scss";
-
-const words = [
-    {
-        sourceWord: "Pipka",
-        sourceLang: "en",
-        targetWord: "Піпка",
-        targetLang: "be",
-        speechPart: "noun",
-        transcriptions: ["/piːpkɑː/"],
-        synonyms: null,
-        antonyms: null,
-        definitions: ["cat's nose"],
-    },
-    {
-        sourceWord: "Unobtrusively",
-        sourceLang: "en",
-        targetWord: "Непрыкметна",
-        targetLang: "be",
-        speechPart: "adverb",
-        transcriptions: ["/ˌʌnəbˈtruːsɪvli/"],
-        synonyms: ["inconspicuous", "low-key", "restrained", "self-effacing", "subdued", "unassuming"],
-        antonyms: ["boastfully", "boldly", "immodestly", "pretentiously"],
-        definitions: ["In a way that does not attract unnecessary attention", "In an unobtrusive manner"],
-    }
-]
 
 
 const Table = () => {
+
+    const dispatch: Dispatch<any> = useDispatch();
+
+    const { isLoading, totalPages, searchTerm, sourceLang, targetLang, words, activeItemId } = useSelector((state: any) => state.words);
 
     const [page, setPage] = useState<number>(1);
 
 
     const handleScroll = (e: any) => {
-        // if (isLoading) return;
+        if (isLoading) return;
 
         const { scrollHeight, scrollTop, clientHeight } = e.target.documentElement;
 
@@ -50,25 +33,37 @@ const Table = () => {
     }, [])
 
 
-    // if (totalPages === 1 && !words.length) {
-    //     return <p className="empty-list"> No data was found </p>;
-    // };
+    useEffect(() => {
+        if (totalPages !== 0 && totalPages < page) return;
 
-    // if (isLoading && !words.length) {
-    //     return <div className="loading"> <Loading /> </div>;
-    // };
+        dispatch(getWords(page === 1, {
+            pageNumber: page,
+            sourceLang: sourceLang.code,
+            targetLang: targetLang.code,
+            searchTerm
+        }))
+
+    }, [page])
+
+
+    if (totalPages === 1 && !words.length) {
+        return <p className="empty-list"> No data was found </p>;
+    };
+
+    if (isLoading && !words.length) {
+        return <div className="loading"> <Loading /> </div>;
+    };
 
     return (
         <div className="table">
-
             {
-                words.map((item: any, i: number) => {
-                    console.log(item)
+                words?.map((item: any ) => {
+
+                    if (activeItemId === item._id) return <TableRowActive key={item._id} />
+
                     return <TableRowDefault
-                        key={i}
-                        id={item._id}
-                        sourceWord={item.sourceWord}
-                        targetWord={item.targetWord}
+                        key={item._id}
+                        {...item}
                     />
                 })
             }

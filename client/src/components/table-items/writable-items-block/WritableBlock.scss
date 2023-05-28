@@ -1,0 +1,69 @@
+@import "../../../variables";
+
+.writable-block {
+
+    &__title {
+        text-transform: capitalize;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 300;
+        color: rgb(128, 131, 140);
+        margin-bottom: 3px;
+    }
+
+    &__items {
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    &__item {
+        position: relative;
+    }
+
+    &__textarea {
+        min-height: 42px;
+        width: 100%;
+        box-shadow: 2px 2px 8px rgba(0, 7, 26, 0.04);
+        @include font-15-400($main_dark-text-color);
+        background: rgba(255, 255, 255, 0.8);
+        border: 2px solid #E1E3F7;
+        outline: none;
+        border-radius: 5px;
+        padding: 5px 30px 5px 10px;
+        resize: vertical;
+    }
+
+    &__delete {
+        width: 17px;
+    }
+
+    &__icon {
+        position: absolute;
+        top: 6px;
+        right: 6px;
+        cursor: pointer;
+        width: 24px;
+        height: 24px;
+        background-color: rgb(255, 206, 122);
+        @include flex-center;
+        border-radius: 4px
+    }
+
+    &__plus {
+        position: relative;
+        @include flex-center
+    }
+
+    &__line {
+        position: absolute;
+        width: 1.5px;
+        height: 15px;
+        background-color: #fff;
+        border-radius: 1px;
+
+        &:last-child {
+            transform: rotate(90deg);
+        }
+    }
+}

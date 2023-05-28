@@ -1,10 +1,15 @@
+import { Dispatch } from "react";
+import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
+import { logout } from "../../store/actions/actionCreators";
 
 import LogoTitle from "../logo-title/LogoTitle";
 import "./Header.scss";
 
 
 const Header = () => {
+
+    const dispatch: Dispatch<any> = useDispatch();
 
     return (
         <header className="header">
@@ -17,7 +22,7 @@ const Header = () => {
                         <img className="header__avatar-icon" src="/images/icons/profile.png" alt="profile" />
                     </div>
                 </NavLink>
-                <button className="header__button" onClick={() => { }}>log out</button>
+                <button className="header__button" onClick={() => dispatch(logout())}>log out</button>
             </div>
         </header>
     )
