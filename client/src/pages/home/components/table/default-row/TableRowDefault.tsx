@@ -1,28 +1,29 @@
 import { Dispatch } from "react";
 import { useDispatch } from "react-redux";
-import { setActiveIndex, setActiveWord } from "../../../../../store/actions/actionCreators";
+import { setActiveIndex, setItemIdToDelete, showModal } from "../../../../../store/actions/actionCreators";
+import { ITableRowDefault } from "../../../../../interfaces";
 
-import RowSpace from "../../../../../components/row-space/RowSpace"; 
+import RowSpace from "../../../../../components/row-space/RowSpace";
 import "./TableRowDefault.scss";
 
 
-const TableRowDefault = (props: any) => {
- 
+const TableRowDefault = ({ _id, sourceWord, targetWord }: ITableRowDefault) => {
+
     const dispatch: Dispatch<any> = useDispatch();
 
     return (
         <div className="row">
-            <div className="row__item" onClick={() => {
+            <div className="row__item" onClick={() => dispatch(setActiveIndex(_id))}>{sourceWord}</div>
+            <div className="row__item" onClick={() => dispatch(setActiveIndex(_id))}>{targetWord}</div>
 
-                dispatch(setActiveWord(props))
-                dispatch(setActiveIndex(props._id))
-            }}>{props.sourceWord}</div>
-            <div className="row__item" onClick={() => {
-
-                dispatch(setActiveWord(props))
-                dispatch(setActiveIndex(props._id))
-            }}>{props.targetWord}</div>
-            <RowSpace />
+            <RowSpace>
+                <div className="row__delete" onClick={() => {
+                    dispatch(setItemIdToDelete(_id));
+                    dispatch(showModal());
+                }}>
+                    <img className="row__delete-icon" src="/images/icons/trashbin.png" alt="delete" />
+                </div>
+            </RowSpace>
         </div>
     )
 }

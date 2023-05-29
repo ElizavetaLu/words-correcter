@@ -39,14 +39,12 @@ export interface ICross {
 export interface ITableRowDefault {
     sourceWord: string,
     targetWord: string,
-    id: string
+    _id: string
 }
 
-export interface IWordsData {
+export interface ITableRowDefault {
     _id: string,
-    sourceLang: string,
     sourceWord: string,
-    targetLang: string,
     targetWord: string
 }
 
@@ -69,12 +67,12 @@ export interface IActiveTableCell {
     newExamples?: string[],
     setNewExamples?: (val: string[]) => void
 }
- 
+
 export interface IBlock {
     title: string,
     dataList: string[] | undefined,
-    setDataList: (val: string[]) => void 
-} 
+    setDataList: (val: string[]) => void
+}
 
 
 // language
@@ -116,19 +114,7 @@ export interface IWordsState {
     sourceLang: ILanguage,
     targetLang: ILanguage,
     words: IWordsData[],
-    activeItemId: null | string,
-    activeWord: {
-        sourceWord: string,
-        sourceLang: string,
-        targetWord: string,
-        targetLang: string,
-        speechPart: string[],
-        transcriptions: string[],
-        synonyms: string[],
-        antonyms: string[],
-        definitions: string[],
-        examples: string[],
-    }
+    activeItemId: string,
 }
 
 
@@ -158,15 +144,23 @@ export type AuthDispatchType = (args: AuthActionForAC) => AuthActionForAC
 
 //recieved data 
 export interface IWordsData {
-    id: string,
+    _id: string,
     sourceLang: string,
     sourceWord: string,
     targetLang: string,
     targetWord: string,
-    speechPart: string[],
-    transcriptions: string[],
-    synonyms: string[],
-    antonyms: string[],
-    definitions: string[],
-    examples: string[]
+
+    sourceSpeechPart: string[],
+    sourceTranscriptions: string[],
+    sourceSynonyms: string[],
+    sourceAntonyms: string[],
+    sourceDefinitions: string[],
+    sourceExamples: string[],
+
+    targetSpeechPart: string[],
+    targetTranscriptions: string[],
+    targetSynonyms: string[],
+    targetAntonyms: string[],
+    targetDefinitions: string[],
+    targetExamples: string[],
 }

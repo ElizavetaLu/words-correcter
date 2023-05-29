@@ -6,6 +6,7 @@ import Loading from "../../../../components/loading/Loading";
 import TableRowDefault from "./default-row/TableRowDefault";
 import TableRowActive from "./active-row/TableRowActive";
 import "./Table.scss";
+import { IWordsData } from "../../../../interfaces";
 
 
 const Table = () => {
@@ -57,13 +58,15 @@ const Table = () => {
     return (
         <div className="table">
             {
-                words?.map((item: any ) => {
+                words?.map((item: IWordsData) => {
 
                     if (activeItemId === item._id) return <TableRowActive key={item._id} />
 
                     return <TableRowDefault
                         key={item._id}
-                        {...item}
+                        _id={item._id}
+                        sourceWord={item.sourceWord}
+                        targetWord={item.targetWord}
                     />
                 })
             }

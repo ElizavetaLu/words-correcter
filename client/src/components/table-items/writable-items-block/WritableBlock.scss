@@ -21,16 +21,19 @@
         position: relative;
     }
 
+    &__text,
     &__textarea {
-        min-height: 42px;
-        width: 100%;
         box-shadow: 2px 2px 8px rgba(0, 7, 26, 0.04);
         @include font-15-400($main_dark-text-color);
         background: rgba(255, 255, 255, 0.8);
         border: 2px solid #E1E3F7;
-        outline: none;
         border-radius: 5px;
         padding: 5px 30px 5px 10px;
+    }
+
+    &__textarea {
+        width: 100%;
+        outline: none;
         resize: vertical;
     }
 
@@ -45,25 +48,19 @@
         cursor: pointer;
         width: 24px;
         height: 24px;
-        background-color: rgb(255, 206, 122);
+        background-color: $danger;
         @include flex-center;
-        border-radius: 4px
-    }
+        border-radius: 4px;
+        padding: 3px;
 
-    &__plus {
-        position: relative;
-        @include flex-center
-    }
-
-    &__line {
-        position: absolute;
-        width: 1.5px;
-        height: 15px;
-        background-color: #fff;
-        border-radius: 1px;
-
-        &:last-child {
-            transform: rotate(90deg);
+        &--add {
+            background-color: $warning;
         }
     }
+
+    &__img-add {
+        width: 100%;
+        height: 100%;
+        rotate: 45deg;
+    } 
 }
