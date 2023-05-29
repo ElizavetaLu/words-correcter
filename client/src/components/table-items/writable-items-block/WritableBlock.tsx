@@ -6,7 +6,7 @@ import "./WritableBlock.scss";
 const WritableBlock = ({ title, dataList, setDataList }: IBlock) => {
 
     const [newSentence, setNewSentence] = useState<string>('');
-    
+
 
     return (
         <div className="writable-block">
@@ -17,11 +17,7 @@ const WritableBlock = ({ title, dataList, setDataList }: IBlock) => {
                     dataList && dataList.length > 0 && dataList.map((sentence: string, i) => {
                         return (
                             <div key={sentence} className="writable-block__item">
-                                <textarea
-                                    className="writable-block__textarea"
-                                    value={sentence} 
-                                    disabled
-                                ></textarea>
+                                <div className="writable-block__text">{sentence}</div>
 
                                 <div className="writable-block__icon">
                                     <img
@@ -29,7 +25,7 @@ const WritableBlock = ({ title, dataList, setDataList }: IBlock) => {
                                         src="/images/icons/trashbin.png"
                                         alt="delete"
                                         onClick={() => {
-                                            const newDataList = dataList.filter((item: any) => item !== sentence);
+                                            const newDataList = dataList.filter((item: string) => item !== sentence);
                                             setDataList(newDataList)
                                         }}
                                     />
@@ -47,16 +43,13 @@ const WritableBlock = ({ title, dataList, setDataList }: IBlock) => {
                         onChange={e => setNewSentence(e.target.value)}
                     ></textarea>
                     <div
-                        className="writable-block__icon"
+                        className="writable-block__icon writable-block__icon--add"
                         onClick={() => {
                             setDataList!([...dataList!, newSentence]);
                             setNewSentence('');
                         }}>
 
-                        <div className="writable-block__plus">
-                            <span className="writable-block__line"></span>
-                            <span className="writable-block__line"></span>
-                        </div>
+                        <img className="writable-block__img-add" src="/images/icons/cross.png" alt="add-icon" />
                     </div>
                 </div>
             </div>

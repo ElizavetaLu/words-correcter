@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux"; 
 import { IActiveTableCell } from "../../../../../interfaces"; 
 
 import WritableBlock from "../../../../../components/table-items/writable-items-block/WritableBlock";
@@ -20,10 +19,7 @@ const TableActiveCell = ({
     newDefinitions, setNewDefinitions,
     newExamples, setNewExamples
 }: IActiveTableCell) => {
-
-
-    const { targetWord } = useSelector((state: any) => state.words.activeWord);
-
+ 
     
     return (
         <div className="cell">
@@ -35,8 +31,7 @@ const TableActiveCell = ({
                 ></input>
                 <TinyDDInput value={lang} setValue={setLang} />
             </div>
-
-            {targetWord !== word &&
+ 
                 <div className="cell__blocks">
                     <Block title="part of speech" dataList={newSpeechPart} setDataList={setNewSpeechPart!} />
                     <Block title="transcription" dataList={newTranscriptions} setDataList={setNewTranscriptions!} />
@@ -45,8 +40,7 @@ const TableActiveCell = ({
 
                     <WritableBlock title="definition" dataList={newDefinitions!} setDataList={setNewDefinitions!} />
                     <WritableBlock title="examples" dataList={newExamples!} setDataList={setNewExamples!} />
-                </div >
-            }
+                </div > 
         </div >
     )
 }

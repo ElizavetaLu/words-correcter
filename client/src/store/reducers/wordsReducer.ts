@@ -4,8 +4,7 @@ import {
     SET_PAGE_NUMBER,
     SET_SEARCH_TERM,
     SET_WORDS,
-    SET_ACTIVE,
-    SET_ACTIVE_WORD,
+    SET_ACTIVE, 
     SET_SOURCE_LANG,
     SET_TARGET_LANG,
     SET_TOTAL_PAGES,
@@ -46,19 +45,7 @@ const initialState: IWordsState = {
     targetLang: targetLang ? JSON.parse(targetLang) : targetLangDefault,
 
     words: [],
-    activeItemId: null,
-    activeWord: {
-        sourceWord: '',
-        sourceLang: '',
-        targetWord: '',
-        targetLang: '',
-        speechPart: [],
-        transcriptions: [],
-        synonyms: [],
-        antonyms: [],
-        definitions: [],
-        examples: []
-    }
+    activeItemId: ''
 }
 
 const wordsReducer = (state = initialState, { type, payload }: IAction) => {
@@ -85,9 +72,6 @@ const wordsReducer = (state = initialState, { type, payload }: IAction) => {
 
         case SET_ACTIVE:
             return { ...state, activeItemId: payload };
-
-        case SET_ACTIVE_WORD:
-            return { ...state, activeWord: payload };
 
         case DELETE_WORD:
 

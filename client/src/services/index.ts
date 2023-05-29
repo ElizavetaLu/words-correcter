@@ -22,4 +22,7 @@ export const setCorrectedWordFetch = (payload: any) => {
 
 export const setBrandNewWordFetch = (payload: any) => {
     return axios.post('new-word', payload)
+}
+export const deleteWordFetch = (id: string) => {
+    return axios.delete(`delete-word?id=${id}`)
 } 

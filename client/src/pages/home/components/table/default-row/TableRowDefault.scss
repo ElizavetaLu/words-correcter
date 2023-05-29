@@ -20,4 +20,24 @@
         background: rgba(255, 255, 255, 0.7);
         color: #4E5157;
     }
+
+    &__delete {
+        background-color: $primary;
+        border-radius: 100%;
+        @include flex-center;
+        cursor: pointer;
+        transition: all .2s ease-out;
+        width: 36px;
+        height: 36px;
+        padding: 8px;
+
+        &:hover {
+            background-color: $danger;
+        }
+    }
+
+    &__delete-icon {
+        width: 100%;
+        height: 100%;
+    }
 }

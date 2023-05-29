@@ -9,14 +9,14 @@ const Block = ({ title, dataList, setDataList }: IBlock) => {
     const [value, setValue] = useState<string>('');
 
 
-    if (!dataList || !setDataList) return null;
+    // if (!dataList || !setDataList) return null;
 
     return (
         <div className="block">
             <span className="block__title">{title}</span>
             <div className="block__items">
                 {
-                    dataList.length ?
+                    dataList?.length ?
                         dataList.map((item: string, i) => {
                             return ( 
                                     <ClickableItem
@@ -38,7 +38,7 @@ const Block = ({ title, dataList, setDataList }: IBlock) => {
                             onChange={e => setValue(e.target.value)}
                             onKeyDown={e => {
                                 if (e.key === 'Enter') {
-                                    setDataList([...dataList, value]);
+                                    setDataList([...dataList!, value]);
                                     setValue('');
                                 }
                             }}

@@ -5,8 +5,8 @@ import {
     AUTH_ERROR,
     AUTH_USER,
     DELETE_WORD,
+    ITEM_ID_TO_DELETE,
     SET_ACTIVE,
-    SET_ACTIVE_WORD,
     SET_LOADING,
     SET_PAGE_NUMBER,
     SET_POPUP_MESSAGE,
@@ -15,10 +15,11 @@ import {
     SET_TARGET_LANG,
     SET_TOTAL_PAGES,
     SET_WORDS,
+    SHOW_MODAL,
     SHOW_POPUP,
     USER_EMAIL
 } from "./types";
-import { loginFetch, setBrandNewWordFetch, setCorrectedWordFetch, wordsFetch } from "../../services";
+import { deleteWordFetch, loginFetch, setBrandNewWordFetch, setCorrectedWordFetch, wordsFetch } from "../../services";
 
 
 
@@ -70,7 +71,7 @@ export const setCorrectedWord = (changedData: any) => (dispatch: Dispatch<AnyAct
 
     setCorrectedWordFetch(changedData)
         .then(({ data }) => {
- 
+
             dispatch({ type: DELETE_WORD, payload: changedData.id });
 
             dispatch({ type: SET_POPUP_MESSAGE, payload: data.result });
@@ -81,13 +82,30 @@ export const setCorrectedWord = (changedData: any) => (dispatch: Dispatch<AnyAct
 
 
 
-export const addBrandNewWord = (data:any) => async (dispatch: any) => {
+export const addBrandNewWord = (data: any) => async (dispatch: any) => {
 
     setBrandNewWordFetch(data)
         .then(({ data }) => {
 
             dispatch({ type: SET_POPUP_MESSAGE, payload: data.result });
             dispatch({ type: SHOW_POPUP });
+        })
+        .catch(err => console.log(err))
+};
+
+export const deleteWord = (id: string) => async (dispatch: any) => {
+
+    deleteWordFetch(id)
+        .then(({ data }) => {
+
+            dispatch({ type: DELETE_WORD, payload: id });
+
+
+            setTimeout(() => {
+                dispatch({ type: SET_POPUP_MESSAGE, payload: data.result });
+                dispatch({ type: SHOW_POPUP })
+            }, 500)
+
         })
         .catch(err => console.log(err))
 };
@@ -113,8 +131,7 @@ export const setTargetLang = (payload: ILanguage) => {
     return { type: SET_TARGET_LANG, payload };
 };
 
-export const setActiveIndex = (id: string | null) => ({ type: SET_ACTIVE, payload: id });
-export const setActiveWord = (payload:any) => ({ type: SET_ACTIVE_WORD, payload });
+export const setActiveIndex = (id: string) => ({ type: SET_ACTIVE, payload: id });
 
 
 
@@ -122,3 +139,9 @@ export const setActiveWord = (payload:any) => ({ type: SET_ACTIVE_WORD, payload 
 export const showPopup = () => ({ type: SHOW_POPUP });
 
 export const setPopupMessage = (message: string) => ({ type: SET_POPUP_MESSAGE, payload: message });
+
+
+//modal
+export const showModal = () => ({ type: SHOW_MODAL });
+
+export const setItemIdToDelete = (id: string) => ({ type: ITEM_ID_TO_DELETE, payload: id });
