@@ -17,4 +17,5 @@ exports.default = (app) => {
     app.get('/words', checkToken_1.checkToken, words_1.getWords);
     app.post('/new-word', checkToken_1.checkToken, words_1.setBrandNewWord);
     app.post('/corrected-word', checkToken_1.checkToken, words_1.setCorrectedWord);
+    app.delete('/delete-word', checkToken_1.checkToken, words_1.deleteWord);
 };
