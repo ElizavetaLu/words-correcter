@@ -1,4 +1,4 @@
-import { getWords, setBrandNewWord, setCorrectedWord } from './controllers/words';
+import { deleteWord, getWords, setBrandNewWord, setCorrectedWord } from './controllers/words';
 import { logIn } from './controllers/authentication';
 import passport from './services/passport';
 import { checkToken } from './middleware/checkToken';
@@ -18,4 +18,5 @@ export default (app: any) => {
     app.get('/words', checkToken, getWords);
     app.post('/new-word', checkToken, setBrandNewWord);
     app.post('/corrected-word', checkToken, setCorrectedWord);
+    app.delete('/delete-word', checkToken, deleteWord);
 }
