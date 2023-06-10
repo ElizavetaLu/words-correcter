@@ -31,18 +31,26 @@ const mongoose_1 = __importStar(require("mongoose"));
 const mongoose_paginate_v2_1 = __importDefault(require("mongoose-paginate-v2"));
 ;
 const wordsSchema = new mongoose_1.Schema({
-    sourceLang: String,
+    sourceLang: {
+        name: String,
+        code: String,
+        flag: String
+    },
     sourceWord: String,
-    targetLang: String,
+    targetLang: {
+        name: String,
+        code: String,
+        flag: String
+    },
     targetWord: String,
     sourceSpeechPart: [String],
-    sourceTranscriptions: [String],
+    sourceTranscription: String,
     sourceSynonyms: [String],
     sourceAntonyms: [String],
     sourceDefinitions: [String],
     sourceExamples: [String],
     targetSpeechPart: [String],
-    targetTranscriptions: [String],
+    targetTranscription: String,
     targetSynonyms: [String],
     targetAntonyms: [String],
     targetDefinitions: [String],

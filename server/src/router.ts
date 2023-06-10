@@ -15,7 +15,7 @@ export default (app: any) => {
 
     app.post('/login', requireLogin, logIn);
  
-    app.get('/words', checkToken, getWords);
+    app.post('/words', checkToken, getWords);
     app.post('/new-word', checkToken, setBrandNewWord);
     app.post('/corrected-word', checkToken, setCorrectedWord);
     app.delete('/delete-word', checkToken, deleteWord);
