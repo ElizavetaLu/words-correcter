@@ -4,15 +4,16 @@ exports.deleteWord = exports.setBrandNewWord = exports.setCorrectedWord = export
 const correctedWords_1 = require("../models/correctedWords");
 const words_1 = require("../models/words");
 const getWords = async (req, res, next) => {
-    const { page, limit, sourceLang, targetLang, keyWords } = req.query;
+    const { page, limit, keyWords } = req.query;
+    const { sourceLang, targetLang } = req.body;
     const userId = req.user;
     const options = {
         page: typeof page === 'string' ? parseInt(page) : 1,
         limit: typeof limit === 'string' ? parseInt(limit) : 15
     };
     const query = {
-        sourceLang,
-        targetLang,
+        "sourceLang.code": sourceLang.code,
+        "targetLang.code": targetLang.code,
         sourceWord: { $regex: keyWords ? keyWords : '', $options: 'i' },
         usersList: { $nin: userId }
     };
@@ -91,3 +92,33 @@ const deleteWord = async (req, res, next) => {
         .catch(() => res.status(400).send({ error: 'Bad request' }));
 };
 exports.deleteWord = deleteWord;
+// CorrectedWords.deleteMany({ "sourceLang": "en"}).then(res=>console.log(res))
+// const newWord = new Words({
+//     sourceLang: {
+//         name: 'English',
+//         code: 'en',
+//         flag: 'gb'
+//     },
+//     sourceWord: "text",
+//     targetLang: {
+//         name: 'Ukrainian',
+//         code: 'uk',
+//         flag: 'ua'
+//     },
+//     targetWord: "pip",
+//     sourceSpeechPart: ['noun'],
+//     sourceTranscription: '[wɜːrd]',
+//     sourceSynonyms: ['test'],
+//     sourceAntonyms: ['test', 'test'],
+//     sourceDefinitions: ['a single unit of language that means something and can be spoken or written'],
+//     sourceExamples: ['Do you know the words to this song?', "word for something What's the Spanish word for ‘table’?"],
+//     targetSpeechPart: ['назоўнік'],
+//     targetTranscription: '[wɜːrd]',
+//     targetSynonyms: ['test'],
+//     targetAntonyms: ['test'],
+//     targetDefinitions: ['unit of language'],
+//     targetExamples: ['He was a true friend in all senses of the word.', "I could hear every word they were saying."],
+//     usersList: [],
+//     correct: false
+// })
+// newWord.save().then(() => { })

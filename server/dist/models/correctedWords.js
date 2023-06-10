@@ -26,9 +26,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.CorrectedWords = void 0;
 const mongoose_1 = __importStar(require("mongoose"));
 const correctedWordsSchema = new mongoose_1.Schema({
-    sourceLang: String,
+    sourceLang: {
+        name: String,
+        code: String,
+        flag: String
+    },
     sourceWord: String,
-    targetLang: String,
+    targetLang: {
+        name: String,
+        code: String,
+        flag: String
+    },
     targetWord: String,
     sourceSpeechPart: [String],
     sourceTranscriptions: [String],

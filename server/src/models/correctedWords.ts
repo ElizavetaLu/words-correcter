@@ -9,9 +9,17 @@ export interface ICorrectedWords extends IWords {
 
 
 const correctedWordsSchema: Schema = new Schema({
-    sourceLang: String,
+    sourceLang: {
+        name: String,
+        code: String,
+        flag: String
+    },
     sourceWord: String,
-    targetLang: String,
+    targetLang: {
+        name: String,
+        code: String,
+        flag: String
+    },
     targetWord: String,
 
     sourceSpeechPart: [String],

@@ -2,21 +2,27 @@ import mongoose, { Document, Schema } from 'mongoose';
 import paginate from 'mongoose-paginate-v2';
 
 
+interface ILanguage {
+    name: string,
+    code: string,
+    flag: string
+}
+
 export interface IWords extends Document {
-    sourceLang: string,
+    sourceLang: ILanguage,
     sourceWord: string,
-    targetLang: string,
+    targetLang: ILanguage,
     targetWord: string,
 
     sourceSpeechPart: string[],
-    sourceTranscriptions: string[],
+    sourceTranscription: string,
     sourceSynonyms: string[],
     sourceAntonyms: string[],
     sourceDefinitions: string[],
     sourceExamples: string[],
 
     targetSpeechPart: string[],
-    targetTranscriptions: string[],
+    targetTranscription: string,
     targetSynonyms: string[],
     targetAntonyms: string[],
     targetDefinitions: string[],
@@ -27,25 +33,33 @@ export interface IWords extends Document {
 };
 
 const wordsSchema: Schema = new Schema({
-    sourceLang: String,
+    sourceLang: {
+        name: String,
+        code: String,
+        flag: String
+    },
     sourceWord: String,
-    targetLang: String,
+    targetLang: {
+        name: String,
+        code: String,
+        flag: String
+    },
     targetWord: String,
 
     sourceSpeechPart: [String],
-    sourceTranscriptions: [String],
+    sourceTranscription: String,
     sourceSynonyms: [String],
     sourceAntonyms: [String],
     sourceDefinitions: [String],
     sourceExamples: [String],
-    
+
     targetSpeechPart: [String],
-    targetTranscriptions: [String],
+    targetTranscription: String,
     targetSynonyms: [String],
     targetAntonyms: [String],
     targetDefinitions: [String],
     targetExamples: [String],
-    
+
     usersList: [String],
     correct: Boolean
 });

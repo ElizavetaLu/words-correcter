@@ -14,7 +14,7 @@ exports.default = (app) => {
         res.send({ success: true });
     });
     app.post('/login', requireLogin, authentication_1.logIn);
-    app.get('/words', checkToken_1.checkToken, words_1.getWords);
+    app.post('/words', checkToken_1.checkToken, words_1.getWords);
     app.post('/new-word', checkToken_1.checkToken, words_1.setBrandNewWord);
     app.post('/corrected-word', checkToken_1.checkToken, words_1.setCorrectedWord);
     app.delete('/delete-word', checkToken_1.checkToken, words_1.deleteWord);
