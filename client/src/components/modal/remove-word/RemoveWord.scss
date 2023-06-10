@@ -1,0 +1,40 @@
+@import "../../../variables";
+
+.remove-word {
+
+    &__message {
+        margin: 20px 0px;
+        text-align: center;
+        @include font-16-400;
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+    }
+
+    &__button {
+        cursor: pointer;
+        text-transform: capitalize;
+        border: none;
+        outline: none;
+        border-radius: 4px;
+        padding: 7px 16px;
+        transition: all .2s ease-in;
+        @include font-16-400;
+        color: #fff;
+
+        &:hover {
+            opacity: .9;
+        }
+
+        &--cancel {
+            background-color: $warning;
+        }
+
+        &--delete {
+            background-color: $danger;
+        }
+    }
+}

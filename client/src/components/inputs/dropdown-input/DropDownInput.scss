@@ -1,7 +1,7 @@
 @import "../../../variables";
 
 .dropdown-search {
-    width: 100%; 
+    width: 100%;
     position: relative;
 
     &__input {
@@ -16,6 +16,15 @@
         outline: none;
         position: relative;
         z-index: 3;
+
+        &--for-modal {
+            padding: 8px 44px 8px 8px;
+            height: 32px;
+            border-radius: 8px;
+            border: 1px solid #BEBED8;
+            @include font-14-400($main_dark-text-color);
+            margin-bottom: 10px;
+        }
     }
 
     &__button {
@@ -29,6 +38,14 @@
         border-style: solid;
         border-width: 6px 6px 0 6px;
         border-color: $primary transparent transparent transparent;
+
+        &--for-modal {
+            top: 13px;
+            right: 8px;
+        }
+        &--active {
+           rotate: 180deg;
+        }
     }
 
     &__list {
@@ -46,7 +63,13 @@
         right: 0;
         max-height: 320px;
         overflow: hidden;
-        overflow-y: scroll
+        overflow-y: scroll;
+
+        &--for-modal {
+            padding-top: 10px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
     }
 
     &__list-item {
@@ -64,6 +87,12 @@
 
         &:hover {
             background-color: #e8edf7;
+        }
+
+        &--for-modal {
+            height: 32px;
+            padding: 0px 8px;
+            @include font-14-400($main_dark-text-color);
         }
     }
 }

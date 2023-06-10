@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { setPopupMessage, showPopup } from "../../store/actions/actionCreators";
 
 import SelectLanguage from "./components/select-language/SelectLanguage";
-import SearchWords from "./components/search-words/SearchWords";
-import AddWord from "./components/add-word/AddWord";
+import SearchWords from "./components/search-words/SearchWords"; 
 import Popup from "../../components/popup/Popup";
-import Table from "./components/table/Table";
+import Table from "./components/table/Table"; 
 
 
 const Home = () => {
@@ -32,9 +31,7 @@ const Home = () => {
 
             <SearchWords />
 
-            <SelectLanguage />
-
-            <AddWord />
+            <SelectLanguage /> 
 
             <Table />
         </main>

@@ -17,7 +17,7 @@ const WritableBlock = ({ title, dataList, setDataList }: IBlock) => {
                     dataList && dataList.length > 0 && dataList.map((sentence: string, i) => {
                         return (
                             <div key={sentence} className="writable-block__item">
-                                <div className="writable-block__text">{sentence}</div>
+                                <p className="writable-block__text">{sentence}</p>
 
                                 <div className="writable-block__icon">
                                     <img

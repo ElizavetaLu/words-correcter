@@ -1,19 +1,18 @@
 import { Dispatch, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getWords } from "../../../../store/actions/actionCreators";
+import { getWords  } from "../../../../store/actions/actionCreators"; 
+import { IWordsData } from "../../../../interfaces";
 
 import Loading from "../../../../components/loading/Loading";
-import TableRowDefault from "./default-row/TableRowDefault";
-import TableRowActive from "./active-row/TableRowActive";
+import TableRowDefault from "./default-row/TableRowDefault"; 
 import "./Table.scss";
-import { IWordsData } from "../../../../interfaces";
 
 
 const Table = () => {
 
-    const dispatch: Dispatch<any> = useDispatch();
+    const dispatch: Dispatch<any> = useDispatch(); 
 
-    const { isLoading, totalPages, searchTerm, sourceLang, targetLang, words, activeItemId } = useSelector((state: any) => state.words);
+    const { isLoading, totalPages, searchTerm, sourceLang, targetLang, words } = useSelector((state: any) => state.words);
 
     const [page, setPage] = useState<number>(1);
 
@@ -39,8 +38,8 @@ const Table = () => {
 
         dispatch(getWords(page === 1, {
             pageNumber: page,
-            sourceLang: sourceLang.code,
-            targetLang: targetLang.code,
+            sourceLang: sourceLang,
+            targetLang: targetLang,
             searchTerm
         }))
 
@@ -58,19 +57,8 @@ const Table = () => {
     return (
         <div className="table">
             {
-                words?.map((item: IWordsData) => {
-
-                    if (activeItemId === item._id) return <TableRowActive key={item._id} />
-
-                    return <TableRowDefault
-                        key={item._id}
-                        _id={item._id}
-                        sourceWord={item.sourceWord}
-                        targetWord={item.targetWord}
-                    />
-                })
+                words?.map((item: IWordsData) => <TableRowDefault key={item._id} {...item} />)
             }
-
         </div>
     )
 }

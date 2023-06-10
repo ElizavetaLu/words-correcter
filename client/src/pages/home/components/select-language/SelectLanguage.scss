@@ -16,4 +16,25 @@
         width: 20px;
         height: 25px;
     }
+
+    .add-button {
+        cursor: pointer;
+        @include flex-align-center;
+        gap: 10px;
+        background-color: $primary;
+        padding: 10px 16px;
+        border-radius: 20px;
+        @include font-15-400(#fff);
+        white-space: nowrap;
+        border: none;
+        transition: all .2s ease-in;
+
+        &__icon {
+            width: 10px;
+        }
+
+        &:hover{
+            background-color: $primary-hover;
+        }
+    }
 }

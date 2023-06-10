@@ -1,11 +1,12 @@
 import { Dispatch, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getWords, setSourceLang, setTargetLang } from "../../../../store/actions/actionCreators";
+import { getWords, setModal, setSourceLang, setTargetLang } from "../../../../store/actions/actionCreators";
 import { ILanguage } from "../../../../interfaces";
 
+import WordDataContainer from "../../../../components/modal/word-data-fields/WordDataContainer";
 import DropDownInput from "../../../../components/inputs/dropdown-input/DropDownInput";
-import RowSpace from "../../../../components/row-space/RowSpace";
 import "./SelectLanguage.scss";
+import RowSpace from "../../../../components/row-space/RowSpace";
 
 
 
@@ -27,8 +28,8 @@ const SelectLanguage = () => {
         dispatch(getWords(true,
             {
                 pageNumber: 1,
-                sourceLang: currentTargetLang.code,
-                targetLang: currentSourceLang.code
+                sourceLang: currentTargetLang,
+                targetLang: currentSourceLang
             }
         ));
 
@@ -43,8 +44,8 @@ const SelectLanguage = () => {
 
         dispatch(getWords(true, {
             pageNumber: 1,
-            sourceLang: lang.code,
-            targetLang: currentTargetLang.code
+            sourceLang: lang,
+            targetLang: currentTargetLang
         }))
     }
 
@@ -54,8 +55,8 @@ const SelectLanguage = () => {
 
         dispatch(getWords(true, {
             pageNumber: 1,
-            sourceLang: currentSourceLang.code,
-            targetLang: lang.code
+            sourceLang: currentSourceLang,
+            targetLang: lang
         }))
     }
 
@@ -81,7 +82,13 @@ const SelectLanguage = () => {
                     action={onTargetLangSelect}
                 />
             </div>
-            <RowSpace />
+
+            <RowSpace>
+                <button className="add-button" onClick={() => dispatch(setModal(<WordDataContainer isNew />))}>
+                    <img className="add-button__icon" src="/images/icons/plus.png" alt="add" />
+                    Add new
+                </button>
+            </RowSpace>
         </div>
     )
 }

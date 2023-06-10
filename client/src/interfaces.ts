@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 //components
 export interface IPopup {
     isShown: boolean,
@@ -11,7 +13,8 @@ export interface IPopup {
 export interface ILanguageDDInputProps {
     value: ILanguage,
     setValue: (lang: ILanguage) => void;
-    action: (lang: ILanguage) => void;
+    action?: (lang: ILanguage) => void;
+    forModal?: boolean
 }
 
 export interface IInputWithLabel {
@@ -36,28 +39,17 @@ export interface ICross {
     error?: boolean
 }
 
-export interface ITableRowDefault {
-    sourceWord: string,
-    targetWord: string,
-    _id: string
-}
 
-export interface ITableRowDefault {
-    _id: string,
-    sourceWord: string,
-    targetWord: string
-}
-
-export interface IActiveTableCell {
+export interface IEditWordData {
     word: string,
-    lang: string,
+    lang: ILanguage,
     setWord: (val: string) => void,
-    setLang: (val: string) => void,
+    setLang: (val: ILanguage) => void,
 
     newSpeechPart?: string[],
     setNewSpeechPart?: (val: string[]) => void,
-    newTranscriptions?: string[],
-    setNewTranscriptions?: (val: string[]) => void,
+    newTranscription?: string,
+    setNewTranscription?: (val: string) => void,
     newSynonyms?: string[],
     setNewSynonyms?: (val: string[]) => void,
     newAntonyms?: string[],
@@ -69,9 +61,30 @@ export interface IActiveTableCell {
 }
 
 export interface IBlock {
+    index?: number,
     title: string,
     dataList: string[] | undefined,
-    setDataList: (val: string[]) => void
+    setDataList: (val: string[]) => void,
+    large?: boolean
+}
+export interface ITableDefaultCell {
+    _id: string,
+    word: string,
+    speechPart: string[],
+    transcription: string,
+    example: string[],
+    definition: string[],
+    synonyms: string[],
+    antonyms: string[],
+
+    isFullDataShown: boolean,
+    toggle: () => void
+}
+
+export interface IModal {
+    isActive: boolean,
+    toggle: () => void,
+    children: ReactNode
 }
 
 
@@ -114,7 +127,7 @@ export interface IWordsState {
     sourceLang: ILanguage,
     targetLang: ILanguage,
     words: IWordsData[],
-    activeItemId: string,
+    activeItemId: string
 }
 
 
@@ -124,8 +137,8 @@ export interface IWordsState {
 //request
 export interface IRequestData {
     pageNumber: number,
-    sourceLang: string,
-    targetLang: string
+    sourceLang: ILanguage,
+    targetLang: ILanguage
     searchTerm?: string,
 }
 
@@ -151,14 +164,14 @@ export interface IWordsData {
     targetWord: string,
 
     sourceSpeechPart: string[],
-    sourceTranscriptions: string[],
+    sourceTranscription: string,
     sourceSynonyms: string[],
     sourceAntonyms: string[],
     sourceDefinitions: string[],
     sourceExamples: string[],
 
     targetSpeechPart: string[],
-    targetTranscriptions: string[],
+    targetTranscription: string,
     targetSynonyms: string[],
     targetAntonyms: string[],
     targetDefinitions: string[],

@@ -1,35 +1,51 @@
 @import "../../../variables";
 
 .clickable-item {
+    height: 22px;
     cursor: pointer;
-    margin: 2px 5px 2px 0;
+    background: #BEC6FF;
+    border-radius: 6px;
+    padding: 2px 8px;
     @include flex-align-center;
-    gap: 8px;
-    border-radius: 4px;
-    background-color: rgb(238, 240, 255);
-    padding: 6px 5px 6px 12px;
-    transition: all .2s ease-in; 
+    transition: all .2s ease-in;
 
     &:hover {
-        background-color: rgb(231, 234, 255);
+        opacity: 0.9;
     }
 
     &__data {
-        color: rgb(106, 117, 202);
-        font-size: 13px;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 18px;
+        color: #EFF2F8;
     }
 
     &__delete {
-        width: 22px;
-        height: 22px;
-        padding: 3px;
-        background-color: #8992dc;
-        border-radius: 100%;
-        @include flex-center;
-    }
+        position: relative;
+        cursor: pointer;
+        width: 7px;
+        height: 7px;
+        margin-left: 6px;
+        opacity: 1;
+        transition: all .2s;
 
-    &__delete-icon {
-        width: 100%;
-        height: 100%; 
-    } 
+        &:before,
+        &:after {
+            position: absolute;
+            content: ' ';
+            left: 2px;
+            height: 8px;
+            width: 1px;
+            background-color: #EFF2F8;
+            border-radius: 1px;
+        }
+
+        &:before {
+            transform: rotate(45deg);
+        }
+
+        &:after {
+            transform: rotate(-45deg);
+        }
+    }
 }

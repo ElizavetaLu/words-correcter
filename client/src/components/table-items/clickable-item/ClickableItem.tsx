@@ -1,11 +1,11 @@
 import { IBlock } from "../../../interfaces";
-import "./ClickableItem.scss"; 
+import "./ClickableItem.scss";
 
 
-const ClickableItem = ({ title, dataList, setDataList }: IBlock) => {
+const ClickableItem = ({ index, title, dataList, setDataList }: IBlock) => {
 
     const onDelete = () => {
-        const newDataList = dataList!.filter(item => item !== title);
+        const newDataList = dataList!.filter((_, i: number) => i !== index);
         setDataList(newDataList)
     }
 
@@ -13,9 +13,7 @@ const ClickableItem = ({ title, dataList, setDataList }: IBlock) => {
         <div className="clickable-item" onClick={onDelete}>
             <span className="clickable-item__data">{title}</span>
 
-            <div className="clickable-item__delete">
-                <img className="clickable-item__delete-icon" src="/images/icons/cross.png" alt="delete" /> 
-            </div>
+            <div className="clickable-item__delete"></div>
         </div>
     )
 }
