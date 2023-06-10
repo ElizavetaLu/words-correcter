@@ -45,7 +45,7 @@ const initialState: IWordsState = {
     targetLang: targetLang ? JSON.parse(targetLang) : targetLangDefault,
 
     words: [],
-    activeItemId: ''
+    activeItemId: '',
 }
 
 const wordsReducer = (state = initialState, { type, payload }: IAction) => {

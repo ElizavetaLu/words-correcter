@@ -1,12 +1,17 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
 
 $main_bg-color: #EFF2F8;
-$main_dark-text-color: #00071A;
+$main_dark-text-color: #00071A; 
+$main_light-text-color: #646975;
+
 $primary: #6A75CA;
 $primary-hover: #616cbb;
+$light-violet: #E5E8FF; 
+
 $danger: #F63C3C;
 $success: #4caf50;
 $warning: rgb(255, 206, 122);
+
 
 $area-width: 42%;
 
@@ -22,19 +27,27 @@ $area-width: 42%;
 }
 
 @mixin font-16-400() {
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 16px;
-    line-height: 24px;
     color: $main_dark-text-color;
 }
 
 @mixin font-15-400($color) {
-    font-family: 'Poppins';
+    font-family: 'Poppins', sans-serif;
     font-style: normal;
     font-weight: 400;
     font-size: 15px;
     line-height: 22px;
+    color: $color;
+}
+
+@mixin font-14-400($color) {
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 21px;
     color: $color;
 }

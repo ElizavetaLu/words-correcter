@@ -4,11 +4,11 @@
 
     &__title {
         text-transform: capitalize;
-        font-size: 14px;
-        line-height: 20px;
-        font-weight: 300;
-        color: rgb(128, 131, 140);
-        margin-bottom: 3px;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 18px;
+        color: #9090B0;
+        margin-bottom: 4px;
     }
 
     &__items {
@@ -18,17 +18,18 @@
     }
 
     &__item {
-        position: relative;
+        position: relative; 
     }
 
     &__text,
     &__textarea {
-        box-shadow: 2px 2px 8px rgba(0, 7, 26, 0.04);
+        border: 1px solid #BEBED8;
+        background-color: transparent;
+        border-radius: 8px;
+        outline: none;
         @include font-15-400($main_dark-text-color);
-        background: rgba(255, 255, 255, 0.8);
-        border: 2px solid #E1E3F7;
-        border-radius: 5px;
         padding: 5px 30px 5px 10px;
+        min-height: 42px; 
     }
 
     &__textarea {
@@ -62,5 +63,5 @@
         width: 100%;
         height: 100%;
         rotate: 45deg;
-    } 
+    }
 }

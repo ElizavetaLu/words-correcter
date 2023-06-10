@@ -5,7 +5,7 @@ import "./DropDownInput.scss";
 
 
 
-const DropDownInput = ({ value, setValue, action }: ILanguageDDInputProps) => {
+const DropDownInput = ({ value, setValue, action, forModal }: ILanguageDDInputProps) => {
 
     const [isOpen, toggle] = useToggle();
 
@@ -18,7 +18,7 @@ const DropDownInput = ({ value, setValue, action }: ILanguageDDInputProps) => {
         <div className="dropdown-search">
             <input
                 type="text"
-                className="dropdown-search__input"
+                className={`dropdown-search__input ${forModal && 'dropdown-search__input--for-modal'}`}
                 value={value.name}
                 onChange={e => {
                     if (!isOpen) toggle();
@@ -26,20 +26,23 @@ const DropDownInput = ({ value, setValue, action }: ILanguageDDInputProps) => {
                 }}
                 onFocus={toggle}
             />
-            <div className="dropdown-search__button" onClick={toggle}></div>
+            <div
+                className={`dropdown-search__button ${forModal && 'dropdown-search__button--for-modal'} ${isOpen && 'dropdown-search__button--active'}`}
+                onClick={toggle}
+            ></div>
 
             {
-                isOpen && <ul className="dropdown-search__list">
+                isOpen && <ul className={`dropdown-search__list ${forModal && 'dropdown-search__list--for-modal'}`} >
                     {
                         filteredLanguages.map(item => {
                             return (
                                 <li
                                     key={item.name}
-                                    className="dropdown-search__list-item"
+                                    className={`dropdown-search__list-item ${forModal && 'dropdown-search__list-item--for-modal'}`}
                                     onClick={() => {
                                         toggle();
                                         setValue(item);
-                                        action(item);
+                                        if (action) action(item);
                                     }}
                                 >{item.name}</li>
                             )

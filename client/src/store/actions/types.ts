@@ -20,6 +20,6 @@ export const DELETE_WORD = 'DELETE_WORD';
 export const SET_POPUP_MESSAGE = 'SET_POPUP_MESSAGE';
 export const SHOW_POPUP = 'SHOW_POPUP';
 
-//modal
-export const SHOW_MODAL = 'SHOW_MODAL';
+//modal 
+export const SET_MODAL = 'SET_MODAL';
 export const ITEM_ID_TO_DELETE = 'ITEM_ID_TO_DELETE';

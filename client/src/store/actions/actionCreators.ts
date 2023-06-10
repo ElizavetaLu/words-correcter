@@ -8,14 +8,14 @@ import {
     ITEM_ID_TO_DELETE,
     SET_ACTIVE,
     SET_LOADING,
+    SET_MODAL,
     SET_PAGE_NUMBER,
     SET_POPUP_MESSAGE,
     SET_SEARCH_TERM,
     SET_SOURCE_LANG,
     SET_TARGET_LANG,
     SET_TOTAL_PAGES,
-    SET_WORDS,
-    SHOW_MODAL,
+    SET_WORDS, 
     SHOW_POPUP,
     USER_EMAIL
 } from "./types";
@@ -135,13 +135,13 @@ export const setActiveIndex = (id: string) => ({ type: SET_ACTIVE, payload: id }
 
 
 
+
+
 //popup
 export const showPopup = () => ({ type: SHOW_POPUP });
-
 export const setPopupMessage = (message: string) => ({ type: SET_POPUP_MESSAGE, payload: message });
 
 
-//modal
-export const showModal = () => ({ type: SHOW_MODAL });
-
+//modal 
+export const setModal = (content?: any ) => ({ type: SET_MODAL, payload: content });
 export const setItemIdToDelete = (id: string) => ({ type: ITEM_ID_TO_DELETE, payload: id });

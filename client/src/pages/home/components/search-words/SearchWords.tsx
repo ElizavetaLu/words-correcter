@@ -18,8 +18,8 @@ const SearchWords = () => {
 
         dispatch(getWords(true, {
             pageNumber: 1,
-            sourceLang: sourceLang.code,
-            targetLang: targetLang.code,
+            sourceLang,
+            targetLang,
             searchTerm,
         }));
     }
@@ -31,8 +31,8 @@ const SearchWords = () => {
             dispatch(getWords(true, {
                 searchTerm,
                 pageNumber: 1,
-                sourceLang: sourceLang.code,
-                targetLang: targetLang.code,
+                sourceLang,
+                targetLang,
             }))
         }, 300)
 

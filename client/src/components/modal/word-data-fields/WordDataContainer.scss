@@ -1,0 +1,60 @@
+@import "../../../variables";
+
+
+.word-data-container {
+
+    &__title {
+        text-align: center;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        margin-bottom: 18px;
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+
+    &__button {
+        cursor: pointer;
+        border: 1px solid #97A0E4;
+        border-radius: 20px;
+        padding: 7px 32px;
+        color: #97A0E4;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+        background-color: transparent;
+
+        &--active {
+            color: #6A75CA;
+            background-color: #D6DAFF;
+            border-color: #D6DAFF;
+        }
+    }
+
+    &__save-container {
+        border-top: 1px solid #fff;
+        margin-top: 10px;
+        padding-top: 10px;
+        display: flex;
+        justify-content: center;
+    }
+
+    &__save {
+        cursor: pointer;
+        background-color: $primary;
+        padding: 10px 16px;
+        border-radius: 20px;
+        @include font-15-400(#fff);
+        border: none;
+        transition: all .2s ease-in;
+
+        &:hover{
+            background-color: $primary-hover;  
+        }
+    }
+}
