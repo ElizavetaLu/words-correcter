@@ -143,5 +143,5 @@ export const setPopupMessage = (message: string) => ({ type: SET_POPUP_MESSAGE, 
 
 
 //modal 
-export const setModal = (content?: any ) => ({ type: SET_MODAL, payload: content });
+export const setModal = ( ) => ({ type: SET_MODAL });
 export const setItemIdToDelete = (id: string) => ({ type: ITEM_ID_TO_DELETE, payload: id });

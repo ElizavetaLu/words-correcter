@@ -22,4 +22,4 @@ export const logIn = (req: Request, res: Response, next: NextFunction) => {
             res.status(200).json({ token: tokenForUser(userObj) });
         })
         .catch(() => res.status(400).send({ error: 'Bad request' }))
-};
+}; 

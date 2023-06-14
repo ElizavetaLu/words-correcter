@@ -12,7 +12,7 @@ const RootLayout = () => {
         <div className="root-container">
             {isAuth && <Header />}
             <Outlet />
-            <Modal />
+            {/* <Modal /> */}
         </div>
     );
 }

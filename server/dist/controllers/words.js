@@ -25,7 +25,7 @@ const getWords = async (req, res, next) => {
 };
 exports.getWords = getWords;
 const setCorrectedWord = (req, res, next) => {
-    const { sourceLang, sourceWord, targetLang, targetWord, sourceSpeechPart, sourceTranscriptions, sourceSynonyms, sourceAntonyms, sourceDefinitions, sourceExamples, targetSpeechPart, targetTranscriptions, targetSynonyms, targetAntonyms, targetDefinitions, targetExamples, id } = req.body;
+    const { sourceLang, sourceWord, targetLang, targetWord, sourceSpeechPart, sourceTranscription, sourceSynonyms, sourceAntonyms, sourceDefinitions, sourceExamples, targetSpeechPart, targetTranscription, targetSynonyms, targetAntonyms, targetDefinitions, targetExamples, id } = req.body;
     const userId = req.user;
     words_1.Words.updateOne({ _id: id }, { $addToSet: { usersList: userId } })
         .then(() => { })
@@ -36,13 +36,13 @@ const setCorrectedWord = (req, res, next) => {
         targetLang,
         targetWord,
         sourceSpeechPart,
-        sourceTranscriptions,
+        sourceTranscription,
         sourceSynonyms,
         sourceAntonyms,
         sourceDefinitions,
         sourceExamples,
         targetSpeechPart,
-        targetTranscriptions,
+        targetTranscription,
         targetSynonyms,
         targetAntonyms,
         targetDefinitions,
@@ -56,7 +56,7 @@ const setCorrectedWord = (req, res, next) => {
 };
 exports.setCorrectedWord = setCorrectedWord;
 const setBrandNewWord = (req, res, next) => {
-    const { sourceLang, sourceWord, targetLang, targetWord, sourceSpeechPart, sourceTranscriptions, sourceSynonyms, sourceAntonyms, sourceDefinitions, sourceExamples, targetSpeechPart, targetTranscriptions, targetSynonyms, targetAntonyms, targetDefinitions, targetExamples, } = req.body;
+    const { sourceLang, sourceWord, targetLang, targetWord, sourceSpeechPart, sourceTranscription, sourceSynonyms, sourceAntonyms, sourceDefinitions, sourceExamples, targetSpeechPart, targetTranscription, targetSynonyms, targetAntonyms, targetDefinitions, targetExamples, } = req.body;
     const userId = req.user;
     const word = new words_1.Words({
         sourceLang,
@@ -64,13 +64,13 @@ const setBrandNewWord = (req, res, next) => {
         targetLang,
         targetWord,
         sourceSpeechPart,
-        sourceTranscriptions,
+        sourceTranscription,
         sourceSynonyms,
         sourceAntonyms,
         sourceDefinitions,
         sourceExamples,
         targetSpeechPart,
-        targetTranscriptions,
+        targetTranscription,
         targetSynonyms,
         targetAntonyms,
         targetDefinitions,
@@ -92,33 +92,3 @@ const deleteWord = async (req, res, next) => {
         .catch(() => res.status(400).send({ error: 'Bad request' }));
 };
 exports.deleteWord = deleteWord;
-// CorrectedWords.deleteMany({ "sourceLang": "en"}).then(res=>console.log(res))
-// const newWord = new Words({
-//     sourceLang: {
-//         name: 'English',
-//         code: 'en',
-//         flag: 'gb'
-//     },
-//     sourceWord: "text",
-//     targetLang: {
-//         name: 'Ukrainian',
-//         code: 'uk',
-//         flag: 'ua'
-//     },
-//     targetWord: "pip",
-//     sourceSpeechPart: ['noun'],
-//     sourceTranscription: '[wɜːrd]',
-//     sourceSynonyms: ['test'],
-//     sourceAntonyms: ['test', 'test'],
-//     sourceDefinitions: ['a single unit of language that means something and can be spoken or written'],
-//     sourceExamples: ['Do you know the words to this song?', "word for something What's the Spanish word for ‘table’?"],
-//     targetSpeechPart: ['назоўнік'],
-//     targetTranscription: '[wɜːrd]',
-//     targetSynonyms: ['test'],
-//     targetAntonyms: ['test'],
-//     targetDefinitions: ['unit of language'],
-//     targetExamples: ['He was a true friend in all senses of the word.', "I could hear every word they were saying."],
-//     usersList: [],
-//     correct: false
-// })
-// newWord.save().then(() => { })

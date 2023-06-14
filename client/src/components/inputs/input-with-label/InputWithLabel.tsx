@@ -1,13 +1,15 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IInputWithLabel } from "../../../interfaces";
 
 import Cross from "../../cross-btn/Cross";
 import "./InputWithLabel.scss";
+import { setAuthError } from "../../../store/actions/actionCreators";
 
 
 const InputWithLabel = ({ type, name, label, value, onChange, error, resetError }: IInputWithLabel) => {
 
     const dispatch = useDispatch();
+    const { errorMessage } = useSelector((state: any) => state.auth)
 
     return (
         <div className='field'>
@@ -21,8 +23,9 @@ const InputWithLabel = ({ type, name, label, value, onChange, error, resetError 
                     name={name}
                     value={value}
                     onChange={e => {
+                        if (errorMessage) resetError(errorMessage);
                         if (error) resetError('');
-                        if (error === 'Invalid login credentials') console.log('auth error');
+                        dispatch(setAuthError(''))
 
                         onChange(e.target.value)
                     }}

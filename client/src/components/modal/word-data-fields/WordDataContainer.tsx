@@ -1,18 +1,16 @@
-import { Dispatch, useState } from "react";
+import { Dispatch, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ILanguage, IWordsData } from "../../../interfaces";
+import { ILanguage, IWordDataContainer, IWordsData } from "../../../interfaces";
+import { addBrandNewWord, setActiveIndex, setCorrectedWord } from "../../../store/actions/actionCreators";
 import useToggle from "../../../hooks/useToggle";
-import { addBrandNewWord, setActiveIndex, setCorrectedWord, setModal } from "../../../store/actions/actionCreators";
 
 import WordData from "./word-data/WordData";
 import "./WordDataContainer.scss";
 
 
-type TWordDataContainer = {
-    isNew?: boolean
-}
 
-const WordDataContainer = ({ isNew }: TWordDataContainer) => {
+
+const WordDataContainer = ({ isNew, toggleModal }: IWordDataContainer) => {
 
     const dispatch: Dispatch<any> = useDispatch();
 
@@ -20,33 +18,82 @@ const WordDataContainer = ({ isNew }: TWordDataContainer) => {
 
     const { activeItemId, words, sourceLang, targetLang } = useSelector((state: any) => state.words);
 
+
     const wordData = words.find((item: IWordsData) => item._id === activeItemId);
 
 
-    const [newSourceWord, setNewSourceWord] = useState<string>(isNew ? '' : wordData?.sourceWord);
-    const [newSourceLang, setNewSourceLang] = useState<ILanguage>(isNew ? sourceLang : wordData?.sourceLang);
+    const [newSourceWord, setNewSourceWord] = useState<string>('');
+    const [newSourceLang, setNewSourceLang] = useState<ILanguage>(sourceLang);
 
-    const [newSourceSpeechPart, setNewSourceSpeechPart] = useState<string[]>(isNew ? [] : wordData?.sourceSpeechPart);
-    const [newSourceTranscription, setNewSourceTranscription] = useState<string>(isNew ? '' : wordData?.sourceTranscriptions);
-    const [newSourceSynonyms, setNewSourceSynonyms] = useState<string[]>(isNew ? [] : wordData?.sourceSynonyms);
-    const [newSourceAntonyms, setNewSourceAntonyms] = useState<string[]>(isNew ? [] : wordData?.sourceAntonyms);
-    const [newSourceDefinitions, setNewSourceDefinitions] = useState<string[]>(isNew ? [] : wordData?.sourceDefinitions);
-    const [newSourceExamples, setNewSourceExamples] = useState<string[]>(isNew ? [] : wordData?.sourceExamples);
+    const [newSourceSpeechPart, setNewSourceSpeechPart] = useState<string[]>([]);
+    const [newSourceTranscription, setNewSourceTranscription] = useState<string>('');
+    const [newSourceSynonyms, setNewSourceSynonyms] = useState<string[]>([]);
+    const [newSourceAntonyms, setNewSourceAntonyms] = useState<string[]>([]);
+    const [newSourceDefinitions, setNewSourceDefinitions] = useState<string[]>([]);
+    const [newSourceExamples, setNewSourceExamples] = useState<string[]>([]);
 
 
-    const [newTargetWord, setNewTargetWord] = useState<string>(isNew ? '' : wordData?.targetWord);
-    const [newTargetLang, setNewTargetLang] = useState<ILanguage>(isNew ? targetLang : wordData?.targetLang);
+    const [newTargetWord, setNewTargetWord] = useState<string>('');
+    const [newTargetLang, setNewTargetLang] = useState<ILanguage>(targetLang);
 
-    const [newTargetSpeechPart, setNewTargetSpeechPart] = useState<string[]>(isNew ? [] : wordData?.targetSpeechPart);
-    const [newTargetTranscription, setNewTargetTranscription] = useState<string>(isNew ? '' : wordData?.targetTranscriptions);
-    const [newTargetSynonyms, setNewTargetSynonyms] = useState<string[]>(isNew ? [] : wordData?.targetSynonyms);
-    const [newTargetAntonyms, setNewTargetAntonyms] = useState<string[]>(isNew ? [] : wordData?.targetAntonyms);
-    const [newTargetDefinitions, setNewTargetDefinitions] = useState<string[]>(isNew ? [] : wordData?.targetDefinitions);
-    const [newTargetExamples, setNewTargetExamples] = useState<string[]>(isNew ? [] : wordData?.targetExamples);
+    const [newTargetSpeechPart, setNewTargetSpeechPart] = useState<string[]>([]);
+    const [newTargetTranscription, setNewTargetTranscription] = useState<string>('');
+    const [newTargetSynonyms, setNewTargetSynonyms] = useState<string[]>([]);
+    const [newTargetAntonyms, setNewTargetAntonyms] = useState<string[]>([]);
+    const [newTargetDefinitions, setNewTargetDefinitions] = useState<string[]>([]);
+    const [newTargetExamples, setNewTargetExamples] = useState<string[]>([]);
+
+    useEffect(() => {
+
+        //update modal data when the word was selected
+        if (activeItemId && wordData)  {
+            const {
+                sourceWord,
+                sourceLang,
+                sourceSpeechPart,
+                sourceTranscription,
+                sourceSynonyms,
+                sourceAntonyms,
+                sourceDefinitions,
+                sourceExamples,
+
+                targetWord,
+                targetLang,
+                targetSpeechPart,
+                targetTranscription,
+                targetSynonyms,
+                targetAntonyms,
+                targetDefinitions,
+                targetExamples
+            } = wordData
+
+
+            setNewSourceWord(isNew ? '' : sourceWord);
+            setNewSourceLang(sourceLang);
+            setNewSourceSpeechPart(isNew ? [] : sourceSpeechPart);
+            setNewSourceTranscription(sourceTranscription);
+            setNewSourceSynonyms(isNew ? [] : sourceSynonyms);
+            setNewSourceAntonyms(isNew ? [] : sourceAntonyms);
+            setNewSourceDefinitions(isNew ? [] : sourceDefinitions);
+            setNewSourceExamples(isNew ? [] : sourceExamples);
+
+            setNewTargetWord(isNew ? '' : targetWord);
+            setNewTargetLang(targetLang);
+            setNewTargetSpeechPart(isNew ? [] : targetSpeechPart);
+            setNewTargetTranscription(targetTranscription);
+            setNewTargetSynonyms(isNew ? [] : targetSynonyms);
+            setNewTargetAntonyms(isNew ? [] : targetAntonyms);
+            setNewTargetDefinitions(isNew ? [] : targetDefinitions);
+            setNewTargetExamples(isNew ? [] : targetExamples);
+        }
+    }, [wordData, activeItemId])
 
 
 
     const onSave = () => {
+
+        if (newSourceWord) return
+        if (newTargetWord) return
 
         const wordData = {
             sourceLang: newSourceLang,
@@ -77,7 +124,29 @@ const WordDataContainer = ({ isNew }: TWordDataContainer) => {
             dispatch(setCorrectedWord(wordData));
         }
 
-        dispatch(setModal());
+
+        //clean up all fields
+        setNewSourceWord('');
+        setNewSourceLang(sourceLang);
+        setNewSourceSpeechPart([]);
+        setNewSourceTranscription('');
+        setNewSourceSynonyms([]);
+        setNewSourceAntonyms([]);
+        setNewSourceDefinitions([]);
+        setNewSourceExamples([]);
+        setNewSourceWord('');
+
+        setNewTargetWord('');
+        setNewTargetLang(targetLang);
+        setNewTargetSpeechPart([]);
+        setNewTargetTranscription('');
+        setNewTargetSynonyms([]);
+        setNewTargetAntonyms([]);
+        setNewTargetDefinitions([]);
+        setNewTargetExamples([]);
+
+
+        toggleModal();
         dispatch(setActiveIndex(''));
     }
 
@@ -122,12 +191,12 @@ const WordDataContainer = ({ isNew }: TWordDataContainer) => {
                     newExamples={newTargetExamples} setNewExamples={setNewTargetExamples}
                 />
             }
-
             <div className="word-data-container__save-container">
                 <button className="word-data-container__save" onClick={onSave}>{
                     isNew ? 'Add new word' : 'Save'
                 }</button>
             </div>
+
         </div>
     )
 }

@@ -23,14 +23,14 @@ const correctedWordsSchema: Schema = new Schema({
     targetWord: String,
 
     sourceSpeechPart: [String],
-    sourceTranscriptions: [String],
+    sourceTranscription: [String],
     sourceSynonyms: [String],
     sourceAntonyms: [String],
     sourceDefinitions: [String],
     sourceExamples: [String],
 
     targetSpeechPart: [String],
-    targetTranscriptions: [String],
+    targetTranscription: [String],
     targetSynonyms: [String],
     targetAntonyms: [String],
     targetDefinitions: [String],

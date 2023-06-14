@@ -17,12 +17,13 @@
         gap: 7px;
     }
 
-    &__item {
-        position: relative; 
+    &__item { 
+        display: flex; 
     }
 
     &__text,
     &__textarea {
+        width: 100%;
         border: 1px solid #BEBED8;
         background-color: transparent;
         border-radius: 8px;
@@ -35,18 +36,16 @@
     &__textarea {
         width: 100%;
         outline: none;
-        resize: vertical;
+        resize: vertical; 
     }
 
     &__delete {
         width: 17px;
     }
 
-    &__icon {
-        position: absolute;
-        top: 6px;
-        right: 6px;
+    &__icon { 
         cursor: pointer;
+        margin-left: 8px;
         width: 24px;
         height: 24px;
         background-color: $danger;

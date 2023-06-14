@@ -1,13 +1,12 @@
 import { Dispatch } from "react";
 import { useDispatch } from "react-redux";
-import { setItemIdToDelete, setModal } from "../../../../../store/actions/actionCreators";
+import { setItemIdToDelete } from "../../../../../store/actions/actionCreators";
 import { IWordsData } from "../../../../../interfaces";
 
 import RowSpace from "../../../../../components/row-space/RowSpace";
 import TableDefaultCell from "../default-row-cell/TableDefaultCell";
-import RemoveWord from "../../../../../components/modal/remove-word/RemoveWord";
-import "./TableRowDefault.scss";
 import useToggle from "../../../../../hooks/useToggle";
+import "./TableRowDefault.scss";
 
 
 const TableRowDefault = ({
@@ -28,7 +27,12 @@ const TableRowDefault = ({
     targetAntonyms,
     targetDefinitions,
     targetExamples,
+
+    toggleDeleteModal,
+    toggleUpdateModal
 }: IWordsData) => {
+
+
 
     const dispatch: Dispatch<any> = useDispatch();
     const [isFullDataShown, toggle] = useToggle();
@@ -47,6 +51,8 @@ const TableRowDefault = ({
 
                 isFullDataShown={isFullDataShown}
                 toggle={toggle}
+
+                toggleUpdateModal={toggleUpdateModal}
             />
             <TableDefaultCell
                 _id={_id}
@@ -60,12 +66,14 @@ const TableRowDefault = ({
 
                 isFullDataShown={isFullDataShown}
                 toggle={toggle}
+
+                toggleUpdateModal={toggleUpdateModal}
             />
 
             <RowSpace>
                 <div className="row__delete" onClick={() => {
                     dispatch(setItemIdToDelete(_id));
-                    dispatch(setModal(<RemoveWord />));
+                    toggleDeleteModal()
                 }}>
                     <img className="row__delete-icon" src="/images/icons/trashbin.png" alt="delete" />
                 </div>
