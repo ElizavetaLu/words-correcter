@@ -25,19 +25,16 @@ const Block = ({ title, dataList, setDataList, large }: IBlock) => {
                         )
                     })
                 }
-
                 <div className="block__input-wrapper">
                     <input
+                        id="test"
                         className="block__input"
                         type="text"
                         value={value}
                         onChange={e => setValue(e.target.value)}
                         onKeyDown={e => {
-
                             if (e.key === 'Enter') {
-
                                 if (!value.trim()) return;
-
                                 setDataList([...dataList!, value]);
                                 setValue('');
                             }

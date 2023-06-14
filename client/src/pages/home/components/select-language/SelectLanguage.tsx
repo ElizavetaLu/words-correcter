@@ -1,16 +1,20 @@
 import { Dispatch, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getWords, setModal, setSourceLang, setTargetLang } from "../../../../store/actions/actionCreators";
+import { getWords, setSourceLang, setTargetLang } from "../../../../store/actions/actionCreators";
 import { ILanguage } from "../../../../interfaces";
 
 import WordDataContainer from "../../../../components/modal/word-data-fields/WordDataContainer";
 import DropDownInput from "../../../../components/inputs/dropdown-input/DropDownInput";
-import "./SelectLanguage.scss";
 import RowSpace from "../../../../components/row-space/RowSpace";
+import Modal from "../../../../components/modal/Modal";
+import useToggle from "../../../../hooks/useToggle";
+import "./SelectLanguage.scss";
 
 
 
 const SelectLanguage = () => {
+
+    const [isShownModal, toggle] = useToggle();
 
     const { sourceLang, targetLang } = useSelector((state: any) => state.words);
 
@@ -61,7 +65,6 @@ const SelectLanguage = () => {
     }
 
 
-
     return (
         <div className="select-language">
             <div className="select-language__inputs">
@@ -84,11 +87,15 @@ const SelectLanguage = () => {
             </div>
 
             <RowSpace>
-                <button className="add-button" onClick={() => dispatch(setModal(<WordDataContainer isNew />))}>
+                <button className="add-button" onClick={toggle}>
                     <img className="add-button__icon" src="/images/icons/plus.png" alt="add" />
                     Add new
                 </button>
             </RowSpace>
+
+            <Modal isShown={isShownModal} toggle={toggle}>
+                <WordDataContainer toggleModal={toggle} isNew />
+            </Modal>
         </div>
     )
 }

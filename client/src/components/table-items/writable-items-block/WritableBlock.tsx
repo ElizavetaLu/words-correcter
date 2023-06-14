@@ -45,6 +45,7 @@ const WritableBlock = ({ title, dataList, setDataList }: IBlock) => {
                     <div
                         className="writable-block__icon writable-block__icon--add"
                         onClick={() => {
+                            if(!newSentence.trim()) return 
                             setDataList!([...dataList!, newSentence]);
                             setNewSentence('');
                         }}>

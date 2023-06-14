@@ -78,13 +78,19 @@ export interface ITableDefaultCell {
     antonyms: string[],
 
     isFullDataShown: boolean,
-    toggle: () => void
+    toggle: () => void,
+    toggleUpdateModal: () => void
 }
 
 export interface IModal {
     isActive: boolean,
     toggle: () => void,
     children: ReactNode
+}
+
+export interface IWordDataContainer {
+    isNew?: boolean,
+    toggleModal: () => void
 }
 
 
@@ -176,4 +182,7 @@ export interface IWordsData {
     targetAntonyms: string[],
     targetDefinitions: string[],
     targetExamples: string[],
+
+    toggleDeleteModal: () => void,
+    toggleUpdateModal: () => void
 }

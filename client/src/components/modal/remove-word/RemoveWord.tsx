@@ -1,10 +1,10 @@
 import { Dispatch } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteWord, setModal } from "../../../store/actions/actionCreators";
+import { deleteWord } from "../../../store/actions/actionCreators";
 import "./RemoveWord.scss";
 
 
-const RemoveWord = () => {
+const RemoveWord = ({ toggle }: { toggle: () => void }) => {
 
     const dispatch: Dispatch<any> = useDispatch();
 
@@ -18,7 +18,7 @@ const RemoveWord = () => {
 
                 <button
                     className="remove-word__button remove-word__button--cancel"
-                    onClick={() => dispatch(setModal())}
+                    onClick={toggle}
                 >cancel
                 </button>
 
@@ -26,7 +26,7 @@ const RemoveWord = () => {
                     className="remove-word__button remove-word__button--delete"
                     onClick={() => {
                         dispatch(deleteWord(itemIdToDelete));
-                        dispatch(setModal());
+                        toggle();
                     }}
                 >delete</button>
 

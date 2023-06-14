@@ -1,8 +1,9 @@
-import { IEditWordData } from "../../../../interfaces";
+ import { IEditWordData } from "../../../../interfaces";
+ 
 import DropDownInput from "../../../inputs/dropdown-input/DropDownInput";
 import Block from "../../../table-items/clickable-items-block/Block";
 import WritableBlock from "../../../table-items/writable-items-block/WritableBlock";
-import "./WordData.scss";
+import "./WordData.scss"; 
 
 
 const WordData = ({
@@ -18,7 +19,8 @@ const WordData = ({
     newDefinitions, setNewDefinitions,
     newExamples, setNewExamples
 }: IEditWordData) => {
-
+ 
+    
     return (
 
         <div className="word-data">
@@ -26,7 +28,7 @@ const WordData = ({
             <DropDownInput value={lang} setValue={setLang} forModal />
 
             <div className="word-data__row">
-                <label className="word-data__label" htmlFor="word">
+              <label className="word-data__label" htmlFor="word">
                     word
                     <input
                         className="word-data__label-input"
@@ -35,8 +37,8 @@ const WordData = ({
                         value={word}
                         onChange={e => setWord(e.target.value)}
                     />
-                </label>
-                <label className="word-data__label" htmlFor="transcription">
+                </label>  
+              <label className="word-data__label" htmlFor="transcription">
                     transcription
                     <input
                         className="word-data__label-input"
@@ -45,7 +47,7 @@ const WordData = ({
                         value={newTranscription}
                         onChange={e => setNewTranscription!(e.target.value)}
                     />
-                </label>
+                </label>  
             </div>
 
 

@@ -4,6 +4,8 @@ import { setActiveIndex, setModal } from "../../../../../store/actions/actionCre
 
 import WordDataContainer from "../../../../../components/modal/word-data-fields/WordDataContainer";
 import "./TableDefaultCell.scss";
+import Modal from "../../../../../components/modal/Modal";
+import useToggle from "../../../../../hooks/useToggle";
 
 
 
@@ -17,8 +19,12 @@ const TableDefaultCell = ({
     synonyms,
     antonyms,
     isFullDataShown,
-    toggle
+    toggle,
+
+    toggleUpdateModal
 }: ITableDefaultCell) => {
+
+
 
     const dispatch = useDispatch();
 
@@ -48,7 +54,8 @@ const TableDefaultCell = ({
                 <div className="default-cell__edit" onClick={e => {
                     e.stopPropagation();
                     dispatch(setActiveIndex(_id));
-                    dispatch(setModal(<WordDataContainer />));
+                    // dispatch(setModal());
+                    toggleUpdateModal()
                 }}>
                     <img className="default-cell__edit-icon" src="/images/icons/pencil.svg" alt="edit" />
                 </div>
@@ -98,6 +105,8 @@ const TableDefaultCell = ({
                 </>
             }
 
+
+         
         </div >
     )
 }
